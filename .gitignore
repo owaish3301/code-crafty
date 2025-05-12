@@ -30,14 +30,24 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files
+.env
+.env*.local
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
+# Prisma
+/src/generated/
+/prisma/migrations/
+
+# Project specific
 code-crafted.zip
+/memoryBank/
+
+# IDE
+.vscode/
+.idea/

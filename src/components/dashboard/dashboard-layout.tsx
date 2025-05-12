@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Home, BookOpen, Code, FileCode, BarChart, Settings, LogOut } from "lucide-react"
+import { signOut } from "next-auth/react"
 
 export function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -102,8 +103,7 @@ function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
+        <SidebarMenu>          <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <a href="/settings">
                 <Settings />
@@ -112,11 +112,9 @@ function AppSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="/logout">
-                <LogOut />
-                <span>Logout</span>
-              </a>
+            <SidebarMenuButton onClick={() => signOut({ callbackUrl: '/' })}>
+              <LogOut />
+              <span>Logout</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

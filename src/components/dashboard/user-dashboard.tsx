@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSession } from "next-auth/react"
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout"
 import { DashboardHeader } from "@/components/dashboard/dashboard-header"
 import { RoadmapProgress } from "@/components/dashboard/roadmap-progress"
@@ -11,6 +12,7 @@ import { ProjectTemplates } from "@/components/dashboard/project-templates"
 import { NoRoadmapPrompt } from "@/components/dashboard/no-roadmap-prompt"
 import { NoLogsPrompt } from "@/components/dashboard/no-logs-prompt"
 import { NoProjectPrompt } from "@/components/dashboard/no-project-prompt"
+import { redirect } from "next/navigation"
 
 // Mock data - in a real app, this would come from an API
 const mockUserData = {
@@ -45,8 +47,55 @@ const mockUserData = {
 }
 
 export function UserDashboard() {
-  // In a real app, you would fetch this data from an API
+  const { data: session, status } = useSession()
   const [userData, setUserData] = useState(mockUserData)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Check if the user is authenticated
+    if (status === "unauthenticated") {
+      redirect("/login")
+    }
+
+    // Fetch user data from API
+    if (status === "authenticated" && session) {
+      setLoading(true)
+      
+      // Get user data from the API
+      fetch("/api/me")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch user data")
+          }
+          return response.json()
+        })
+        .then(data => {
+          // Update the user name with the real data
+          setUserData(prevData => ({
+            ...prevData,
+            name: data.name || session.user?.name || "User",
+            // Keep mock data for other fields for now
+          }))
+        })
+        .catch(error => {
+          console.error("Error fetching user data:", error)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
+    }
+  }, [session, status])
+
+  if (status === "loading" || loading) {
+    return (
+      <DashboardLayout>
+        <div className="flex flex-col gap-8 p-6">
+          <div className="h-24 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-800"></div>
+          <div className="h-64 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-800"></div>
+        </div>
+      </DashboardLayout>
+    )
+  }
 
   return (
     <DashboardLayout>
