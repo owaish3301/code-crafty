@@ -82,8 +82,7 @@ export const authOptions: NextAuthOptions = {
       
       // Allow sign in
       return true;
-    },
-    async jwt({ token, account }) {
+    },    async jwt({ token, account, user }) {
       // Persist the OAuth access_token and other important data
       if (account) {
         token.accessToken = account.access_token;
@@ -91,6 +90,12 @@ export const authOptions: NextAuthOptions = {
         token.expiresAt = account.expires_at;
         token.tokenType = account.token_type;
       }
+      
+      // Add user role to token if available
+      if (user) {
+        token.role = (user as any).role;
+      }
+      
       return token;
     },
     async session({ session, token }) {
@@ -98,6 +103,7 @@ export const authOptions: NextAuthOptions = {
       if (token && session.user) {
         (session as any).accessToken = token.accessToken;
         (session as any).user.githubId = token.sub;
+        (session as any).user.role = token.role;
       }
       return session;
     }  },

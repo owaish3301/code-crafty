@@ -54,6 +54,7 @@ model User {
   projects      Project[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @default(now()) @updatedAt
+  role          UserRole  @default(USER)
 }
 
 model VerificationToken {
@@ -62,6 +63,11 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum UserRole {
+  USER
+  ADMIN
 }
 
 // Application specific models

@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import type { ReactNode } from "react"
 import {
   SidebarProvider,
@@ -17,8 +18,8 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Home, BookOpen, Code, FileCode, BarChart, Settings, LogOut } from "lucide-react"
-import { signOut } from "next-auth/react"
+import { Home, BookOpen, Code, FileCode, BarChart, Settings, LogOut, Shield } from "lucide-react"
+import { signOut, useSession } from "next-auth/react"
 
 export function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -43,6 +44,27 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
 }
 
 function AppSidebar() {
+  const { data: session } = useSession()
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    // Check if the user is an admin
+    async function checkAdmin() {
+      try {
+        const res = await fetch("/api/auth/check-admin")
+        const data = await res.json()
+        setIsAdmin(data.isAdmin)
+      } catch (error) {
+        console.error("Error checking admin status:", error)
+        setIsAdmin(false)
+      }
+    }
+
+    if (session) {
+      checkAdmin()
+    }
+  }, [session])
+
   return (
     <Sidebar variant="inset">
       <SidebarHeader>
@@ -98,12 +120,23 @@ function AppSidebar() {
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+              {isAdmin && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <a href="/admin">
+                      <Shield />
+                      <span>Admin</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenu>          <SidebarMenuItem>
+        <SidebarMenu>
+          <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <a href="/settings">
                 <Settings />

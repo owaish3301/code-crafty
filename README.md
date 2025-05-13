@@ -1,4 +1,15 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CodeCrafted Learning Platform
+
+A platform that offers roadmaps for different technologies (like Java, React) and helps users track their learning progress and build projects based on what they've learned.
+
+## Features
+
+- **Learning Roadmaps**: Browse and follow structured learning paths for different technologies
+- **Progress Tracking**: Log what you've learned and track your progress
+- **Project Generation**: AI generates projects based on your learning progress
+- **Guided Learning**: Step-by-step guides to help you build projects
+- **Feedback System**: Get AI feedback on your code submissions
+- **Admin Dashboard**: Manage roadmaps, users, and content (for admins only)
 
 ## Getting Started
 
