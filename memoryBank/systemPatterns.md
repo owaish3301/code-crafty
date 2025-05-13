@@ -4,7 +4,7 @@
 - **Frontend:** Next.js (React), Tailwind CSS, shadcn/ui, Monaco Editor
 - **Backend:** Next.js API routes, Prisma ORM, PostgreSQL
 - **AI Integration:** OpenRouter API for project plan generation and feedback
-- **Authentication:** NextAuth.js
+- **Authentication:** NextAuth.js with GitHub App (OAuth), PrismaAdapter, JWT sessions, advanced repo/PR scopes, custom session fields, and robust error handling.
 - **Admin Dashboard:** Protected routes for roadmap management
 
 ## Key Design Patterns
@@ -15,6 +15,14 @@
 - **YAGNI:** Only build features needed for the MVP.
 
 ## Core Flows
+
+### Authentication Flow
+1. User visits `/login` and signs in with GitHub (OAuth via GitHub App).
+2. NextAuth.js uses PrismaAdapter to persist user/account/session data.
+3. Custom sign-in logic links GitHub accounts to existing users by email.
+4. JWT session includes GitHub access/refresh tokens and user IDs.
+5. Authenticated users are redirected to the dashboard; sign-out returns to home.
+6. Errors are routed to `/auth/error` with user-friendly messages and retry options.
 
 ### User Flow
 1. Sign up / Login

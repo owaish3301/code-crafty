@@ -17,6 +17,11 @@
 
 ## Authentication
 - **Library:** NextAuth.js
+- **Adapter:** PrismaAdapter for persistent user/account/session storage
+- **Session:** JWT-based, with custom fields (accessToken, githubId, etc.)
+- **Provider:** GitHub App OAuth with advanced scopes (`repo`, `pull_request:write`, `metadata:read`, etc.)
+- **Error Handling:** Custom error page for NextAuth errors
+- **Type Safety:** Custom TypeScript types for session/JWT extensions
 
 ## Admin Tools
 - **Dashboard:** Protected admin routes for roadmap management
