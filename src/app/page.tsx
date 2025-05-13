@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Code, BookOpen, Sparkles, CheckCircle } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
             <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">
               About
             </Link>
+            <ThemeToggle />
             <Link href="/login">
               <Button variant="outline" size="sm">
                 Sign In

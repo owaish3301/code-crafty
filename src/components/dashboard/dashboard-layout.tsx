@@ -20,6 +20,7 @@ import {
 import { ThemeProvider } from "@/components/theme-provider"
 import { Home, BookOpen, Code, FileCode, BarChart, Settings, LogOut, Shield } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -32,6 +33,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
               <div className="container mx-auto">
                 <div className="flex items-center justify-between p-4">
                   <SidebarTrigger />
+                  <ThemeToggle />
                 </div>
                 {children}
               </div>
@@ -145,7 +147,7 @@ function AppSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={() => signOut({ callbackUrl: '/' })}>
+            <SidebarMenuButton onClick={() => signOut({ callbackUrl: "/" })}>
               <LogOut />
               <span>Logout</span>
             </SidebarMenuButton>

@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useRouter, useSearchParams } from "next/navigation"
 import { Github, Code } from "lucide-react"
 import Link from "next/link"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function LoginPage() {
   const { data: session, status } = useSession()
@@ -40,6 +41,7 @@ export default function LoginPage() {
             <Code className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold">CodeCrafted</span>
           </Link>
+          <ThemeToggle />
         </div>
       </header>
 
