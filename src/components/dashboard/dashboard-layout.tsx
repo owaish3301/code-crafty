@@ -18,6 +18,7 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
+import Link from "next/link"
 import { Home, BookOpen, Code, FileCode, BarChart, Settings, LogOut, Shield } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -84,51 +85,51 @@ function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive>
-                  <a href="/dashboard">
+                  <Link href="/dashboard">
                     <Home />
                     <span>Dashboard</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="/roadmaps">
+                  <Link href="/roadmaps">
                     <BookOpen />
                     <span>Roadmaps</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="/projects">
+                  <Link href="/projects">
                     <FileCode />
                     <span>Projects</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="/editor">
+                  <Link href="/editor">
                     <Code />
                     <span>Code Editor</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="/analytics">
+                  <Link href="/analytics">
                     <BarChart />
                     <span>Analytics</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {isAdmin && (
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="/admin">
+                    <Link href="/admin">
                       <Shield />
                       <span>Admin</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )}
@@ -140,10 +141,10 @@ function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="/settings">
+              <Link href="/settings">
                 <Settings />
                 <span>Settings</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
