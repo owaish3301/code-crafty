@@ -12,7 +12,7 @@ import Link from "next/link"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function LoginPage() {
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isLoading, setIsLoading] = useState(false)
@@ -126,9 +126,8 @@ export default function LoginPage() {
                   <div className="relative flex justify-center text-xs uppercase">
                     <span className="bg-card px-2 text-muted-foreground">Or</span>
                   </div>
-                </div>
-                <div className="text-center text-sm text-muted-foreground">
-                  Don't have an account?{" "}
+                </div>                <div className="text-center text-sm text-muted-foreground">
+                  Don&apos;t have an account?{" "}
                   <Link href="/login" className="text-primary hover:underline">
                     Create one with GitHub
                   </Link>

@@ -1,11 +1,11 @@
 // src/app/api/auth/test/route.ts
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../[...nextauth]/route";
 import prisma from "@/lib/prisma";
 
 // A test route to verify authentication and Prisma connection
-export async function GET(_req: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
     

@@ -11,9 +11,8 @@ export function NoLogsPrompt() {
           Log Your Learning
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <p className="mb-4 text-muted-foreground">
-          Start logging what you've learned to track your progress and generate personalized projects.
+      <CardContent>        <p className="mb-4 text-muted-foreground">
+          Start logging what you&apos;ve learned to track your progress and generate personalized projects.
         </p>
         <Button>Log Learning</Button>
       </CardContent>

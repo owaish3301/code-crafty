@@ -71,20 +71,17 @@ export default function Home() {
                         <div className="h-3 w-3 rounded-full bg-green-500"></div>
                       </div>
                       <div className="text-xs font-medium">Project: Weather App</div>
-                    </div>
-                    <div className="rounded-md bg-black p-4 font-mono text-xs text-green-400">
-                      <div className="mb-2 text-white">// Module 1: Setting up the API client</div>
+                    </div>                    <div className="rounded-md bg-black p-4 font-mono text-xs text-green-400">
+                      <div className="mb-2 text-white">{/* Module 1: Setting up the API client */}</div>
                       <div>class WeatherApiClient {"{"}</div>
                       <div className="ml-4">private final String apiKey;</div>
                       <div className="ml-4">private final String baseUrl;</div>
                       <div className="ml-4"></div>
-                      <div className="ml-4">public WeatherApiClient(String apiKey) {"{"}</div>
-                      <div className="ml-8">this.apiKey = apiKey;</div>
-                      <div className="ml-8">this.baseUrl = "https://api.weather.com";</div>
+                      <div className="ml-4">public WeatherApiClient(String apiKey) {"{"}</div>                      <div className="ml-8">this.apiKey = apiKey;</div>
+                      <div className="ml-8">this.baseUrl = &quot;https://api.weather.com&quot;;</div>
                       <div className="ml-4">{"}"}</div>
                       <div className="ml-4"></div>
-                      <div className="ml-4">public WeatherData getWeather(String city) {"{"}</div>
-                      <div className="ml-8">// Implementation here</div>
+                      <div className="ml-4">public WeatherData getWeather(String city) {"{"}</div>                      <div className="ml-8">{/* Implementation here */}</div>
                       <div className="ml-4">{"}"}</div>
                       <div>{"}"}</div>
                     </div>
@@ -128,9 +125,8 @@ export default function Home() {
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                   <Sparkles className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold">AI-Generated Projects</h3>
-                <p className="text-muted-foreground">
-                  Our AI creates personalized projects based on what you've learned, with step-by-step guidance for
+                <h3 className="mb-2 text-xl font-semibold">AI-Generated Projects</h3>                <p className="text-muted-foreground">
+                  Our AI creates personalized projects based on what you&apos;ve learned, with step-by-step guidance for
                   implementation.
                 </p>
               </div>
@@ -167,9 +163,8 @@ export default function Home() {
                   description:
                     "Follow structured learning paths for various technologies, sourced from industry experts at roadmap.sh.",
                 },
-                {
-                  title: "Learning Logs",
-                  description: "Track what you've learned and see your progress over time with detailed learning logs.",
+                {                  title: "Learning Logs",
+                  description: "Track what you&apos;ve learned and see your progress over time with detailed learning logs.",
                 },
                 {
                   title: "AI Project Generator",
@@ -220,11 +215,10 @@ export default function Home() {
                     "The AI-generated projects helped me apply what I learned in a practical way. The feedback system is like having a mentor available 24/7.",
                   image: "/placeholder.svg?height=80&width=80",
                 },
-                {
-                  name: "Sarah Chen",
+                {                  name: "Sarah Chen",
                   role: "Computer Science Student",
                   content:
-                    "I've tried many platforms, but the structured roadmaps and project-based learning approach here made a huge difference in my understanding.",
+                    "I&apos;ve tried many platforms, but the structured roadmaps and project-based learning approach here made a huge difference in my understanding.",
                   image: "/placeholder.svg?height=80&width=80",
                 },
                 {
@@ -235,8 +229,7 @@ export default function Home() {
                   image: "/placeholder.svg?height=80&width=80",
                 },
               ].map((testimonial, index) => (
-                <div key={index} className="rounded-lg border bg-card p-6 shadow-sm">
-                  <p className="mb-4 italic text-muted-foreground">"{testimonial.content}"</p>
+                <div key={index} className="rounded-lg border bg-card p-6 shadow-sm">                  <p className="mb-4 italic text-muted-foreground">&quot;{testimonial.content}&quot;</p>
                   <div className="flex items-center gap-4">
                     <Image
                       src={testimonial.image || "/placeholder.svg"}

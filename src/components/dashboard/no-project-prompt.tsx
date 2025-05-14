@@ -11,9 +11,8 @@ export function NoProjectPrompt() {
           Generate Your First Project
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <p className="mb-4 text-muted-foreground">
-          Based on what you've learned, we can generate a personalized project for you to practice your skills.
+      <CardContent>        <p className="mb-4 text-muted-foreground">
+          Based on what you&apos;ve learned, we can generate a personalized project for you to practice your skills.
         </p>
         <Button>Generate Project</Button>
       </CardContent>

@@ -56,10 +56,17 @@ export async function scrapeRoadmap(technology: Technology): Promise<ScrapedRoad
 /**
  * Parse roadmap nodes from roadmap.sh format to our application's format
  */
-function parseRoadmapNodes(nodes: any[]): RoadmapNode[] {
-  return nodes.map(node => ({
+type RoadmapNodeInput = { 
+  id?: string; 
+  name?: string; 
+  title?: string; 
+  description?: string; 
+  children?: RoadmapNodeInput[] 
+};
+
+function parseRoadmapNodes(nodes: RoadmapNodeInput[]): RoadmapNode[] {  return nodes.map(node => ({
     id: node.id || generateId(),
-    title: node.name || node.title,
+    title: node.name || node.title || "Untitled Node", // Provide a default value
     description: node.description,
     children: node.children ? parseRoadmapNodes(node.children) : undefined
   }));

@@ -17,9 +17,8 @@ export function RecentLogs({ logs }: RecentLogsProps) {
       <CardHeader>
         <CardTitle>Recent Learning Logs</CardTitle>
       </CardHeader>
-      <CardContent>
-        {logs.length === 0 ? (
-          <p className="text-muted-foreground">You haven't logged any learning yet.</p>
+      <CardContent>        {logs.length === 0 ? (
+          <p className="text-muted-foreground">You haven&apos;t logged any learning yet.</p>
         ) : (
           <div className="space-y-4">
             {logs.map((log) => (

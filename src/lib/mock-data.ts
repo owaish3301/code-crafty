@@ -208,7 +208,7 @@ export function getRoadmap(technology: Technology): Roadmap {
 
 // Mock function to get all available roadmaps
 export function getAllRoadmaps(): { id: string; name: string; description: string }[] {
-  return Object.entries(mockRoadmaps).map(([key, roadmap]) => ({
+  return Object.entries(mockRoadmaps).map(([, roadmap]) => ({
     id: roadmap.id,
     name: roadmap.name,
     description: roadmap.description,

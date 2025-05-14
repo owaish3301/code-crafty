@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ const errorMessages: Record<string, string> = {
   default: "An error occurred during authentication. Please try again.",
 };
 
-export default function AuthErrorPage() {
+function AuthErrorContent() {
   const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const [callbackUrl, setCallbackUrl] = useState<string>("/dashboard");
@@ -52,10 +52,9 @@ export default function AuthErrorPage() {
             <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4">
               <div className="flex">
                 <div className="text-sm text-red-700 dark:text-red-400">
-                  <p>{errorMessage}</p>
-                  {error === "OAuthAccountNotLinked" && (
+                  <p>{errorMessage}</p>                  {error === "OAuthAccountNotLinked" && (
                     <p className="mt-2">
-                      If you're trying to use a new login method, please use your original sign-in method instead or contact support to link your accounts.
+                      If you&apos;re trying to use a new login method, please use your original sign-in method instead or contact support to link your accounts.
                     </p>
                   )}
                 </div>
@@ -71,7 +70,15 @@ export default function AuthErrorPage() {
             Try Again
           </Button>
         </CardFooter>
-      </Card>
-    </div>
+      </Card>    </div>
+  );
+}
+
+// Wrap the component that uses useSearchParams in Suspense
+export default function AuthErrorPage() {
+  return (
+    <Suspense fallback={<div className="flex min-h-screen items-center justify-center">Loading...</div>}>
+      <AuthErrorContent />
+    </Suspense>
   );
 }
