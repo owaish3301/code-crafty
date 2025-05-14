@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout"
 import { DashboardHeader } from "@/components/dashboard/dashboard-header"
@@ -13,8 +12,8 @@ import { NoRoadmapPrompt } from "@/components/dashboard/no-roadmap-prompt"
 import { NoLogsPrompt } from "@/components/dashboard/no-logs-prompt"
 import { NoProjectPrompt } from "@/components/dashboard/no-project-prompt"
 import { redirect } from "next/navigation"
+import { useAppData } from "@/context/app-data-context"
 
-// Mock data - in a real app, this would come from an API
 const mockUserData = {
   name: "Owaish",
   hasRoadmap: true,
@@ -48,43 +47,7 @@ const mockUserData = {
 
 export function UserDashboard() {
   const { data: session, status } = useSession()
-  const [userData, setUserData] = useState(mockUserData)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    // Check if the user is authenticated
-    if (status === "unauthenticated") {
-      redirect("/login")
-    }
-
-    // Fetch user data from API
-    if (status === "authenticated" && session) {
-      setLoading(true)
-      
-      // Get user data from the API
-      fetch("/api/me")
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("Failed to fetch user data")
-          }
-          return response.json()
-        })
-        .then(data => {
-          // Update the user name with the real data
-          setUserData(prevData => ({
-            ...prevData,
-            name: data.name || session.user?.name || "User",
-            // Keep mock data for other fields for now
-          }))
-        })
-        .catch(error => {
-          console.error("Error fetching user data:", error)
-        })
-        .finally(() => {
-          setLoading(false)
-        })
-    }
-  }, [session, status])
+  const { user, loading } = useAppData()
 
   if (status === "loading" || loading) {
     return (
@@ -95,6 +58,16 @@ export function UserDashboard() {
         </div>
       </DashboardLayout>
     )
+  }
+
+  if (status === "unauthenticated") {
+    redirect("/login")
+  }
+
+  const userData = {
+    ...mockUserData,
+    name: user?.name || session?.user?.name || "User",
+    // Keep mock data for other fields for now
   }
 
   return (

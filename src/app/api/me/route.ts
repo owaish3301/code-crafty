@@ -13,9 +13,14 @@ export async function GET() {
     if (!session || !session.user) {
       return NextResponse.json(
         { error: "Not authenticated" },
-        { status: 401 }
+        { 
+          status: 401,
+          headers: {
+            'Cache-Control': 'no-store, must-revalidate'
+          }
+        }
       );
-    }    // Get user from database with additional info
+    }// Get user from database with additional info
     const user = await prisma.user.findUnique({
       where: {
         email: session.user.email as string,
@@ -45,15 +50,23 @@ export async function GET() {
         { error: "User not found" },
         { status: 404 }
       );
-    }
-
-    return NextResponse.json(user);
+    }    // Return user data with cache-control header for 5 minutes
+    return NextResponse.json(user, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=300'
+      }
+    });
   } catch (error: unknown) {
     console.error("Error fetching user data:", error);
     const message = error instanceof Error ? error.message : "Failed to fetch user data";
     return NextResponse.json(
       { error: message },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-store, must-revalidate'
+        }
+      }
     );
   }
 }
