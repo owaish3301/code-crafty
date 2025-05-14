@@ -1,10 +1,10 @@
 # Active Context
 
 ## Current Focus
-- Authentication system: NextAuth.js with GitHub App, PrismaAdapter, JWT sessions, custom session fields, and error handling
-- Documenting architecture, tech stack, and user/product context
+- Creating and rendering roadmaps
 
 ## Recent Changes
+- Added light and dark modes
 - Implemented robust authentication with GitHub App OAuth and advanced repo/PR scopes
 - Integrated PrismaAdapter for persistent user/account/session storage
 - Added custom session fields (accessToken, githubId, etc.) and TypeScript types
