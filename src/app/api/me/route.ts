@@ -46,10 +46,11 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json(user);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error fetching user data:", error);
+    const message = error instanceof Error ? error.message : "Failed to fetch user data";
     return NextResponse.json(
-      { error: error.message || "Failed to fetch user data" },
+      { error: message },
       { status: 500 }
     );
   }

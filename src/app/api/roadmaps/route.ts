@@ -8,10 +8,11 @@ export async function GET(req: NextRequest) {
     const roadmaps = getAllRoadmaps();
     
     return NextResponse.json(roadmaps);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error fetching roadmaps:", error);
+    const message = error instanceof Error ? error.message : "Failed to fetch roadmaps";
     return NextResponse.json(
-      { error: error.message || "Failed to fetch roadmaps" },
+      { error: message },
       { status: 500 }
     );
   }

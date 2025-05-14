@@ -27,10 +27,11 @@ export async function GET(
     const roadmap = getRoadmap(technology as Technology);
     
     return NextResponse.json(roadmap);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(`Error fetching ${params.technology} roadmap:`, error);
+    const message = error instanceof Error ? error.message : "Failed to fetch roadmap";
     return NextResponse.json(
-      { error: error.message || "Failed to fetch roadmap" },
+      { error: message },
       { status: 500 }
     );
   }

@@ -35,10 +35,11 @@ export async function GET(
     );
     
     return NextResponse.json(userProgress);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(`Error fetching user progress for roadmap ${params.roadmapId}:`, error);
+    const message = error instanceof Error ? error.message : "Failed to fetch user progress";
     return NextResponse.json(
-      { error: error.message || "Failed to fetch user progress" },
+      { error: message },
       { status: 500 }
     );
   }

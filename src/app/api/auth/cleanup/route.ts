@@ -1,6 +1,10 @@
 // src/app/api/auth/cleanup/route.ts
 import { NextRequest, NextResponse } from "next/server";
+// src/app/api/auth/cleanup/route.ts
+// src/app/api/auth/cleanup/route.ts
+// src/app/api/auth/cleanup/route.ts
 import prisma from "@/lib/prisma";
+// TODO: Replace 'any' with proper types from Prisma client if available
 
 // SECURITY WARNING: This route should be disabled in production
 // and is only meant for development and debugging
@@ -33,12 +37,12 @@ export async function GET(req: NextRequest) {
         },
       });
         return NextResponse.json({
-        users: users.map(user => ({
+        users: users.map((user: any) => ({
           id: user.id,
           email: user.email,
           name: user.name,
           accountsCount: user.accounts.length,
-          accountProviders: user.accounts.map(acc => acc.provider),
+          accountProviders: user.accounts.map((acc: any) => acc.provider),
         })),
       });
     }
@@ -98,10 +102,11 @@ export async function GET(req: NextRequest) {
       { error: "Invalid action. Valid actions: list-users, delete-user, clear-all" },
       { status: 400 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Auth cleanup error:", error);
+    const message = error instanceof Error ? error.message : "Auth cleanup failed";
     return NextResponse.json(
-      { error: error.message },
+      { error: message },
       { status: 500 }
     );
   }
