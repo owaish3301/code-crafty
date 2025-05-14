@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth/next";
 import prisma from "@/lib/prisma";
-import { authOptions } from "../../auth/[...nextauth]/route";
 import { isUserAdmin } from "@/lib/auth-utils";
 
 // GET /api/admin/users - List all users (admin only)

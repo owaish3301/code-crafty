@@ -5,7 +5,7 @@ import { authOptions } from "../[...nextauth]/route";
 import prisma from "@/lib/prisma";
 
 // A test route to verify authentication and Prisma connection
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     

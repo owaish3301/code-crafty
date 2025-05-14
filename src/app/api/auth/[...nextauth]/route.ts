@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 60 * 60 * 24, // 24 hours
   },
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account, profile: _profile, email: _email, credentials: _credentials }) {
       // Allow sign in if:
       // 1. This is a first time sign in
       // 2. The account has the same email
@@ -58,7 +58,7 @@ export const authOptions: NextAuthOptions = {
         // If there is a user with this email but no GitHub account linked yet,
         // we need to link them
         const linkedGithubAccount = existingUser.accounts.find(
-          (acc) => acc.provider === "github"
+          (acc: { provider: string }) => acc.provider === "github"
         );
         
         if (!linkedGithubAccount && account.providerAccountId) {

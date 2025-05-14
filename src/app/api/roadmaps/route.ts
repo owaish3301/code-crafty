@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAllRoadmaps } from "@/lib/mock-data";
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   try {
     // Get all available roadmaps
     const roadmaps = getAllRoadmaps();

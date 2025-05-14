@@ -37,12 +37,12 @@ export async function GET(req: NextRequest) {
         },
       });
         return NextResponse.json({
-        users: users.map((user: any) => ({
+        users: users.map((user: { id: string; email: string; name: string; accounts: { provider: string }[] }) => ({
           id: user.id,
           email: user.email,
           name: user.name,
           accountsCount: user.accounts.length,
-          accountProviders: user.accounts.map((acc: any) => acc.provider),
+          accountProviders: user.accounts.map((acc: { provider: string }) => acc.provider),
         })),
       });
     }
