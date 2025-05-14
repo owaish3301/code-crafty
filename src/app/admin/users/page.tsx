@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -132,9 +133,11 @@ export default function AdminUsersPage() {
                         <td className="py-3">
                           <div className="flex items-center gap-2">
                             {user.image && (
-                              <img
+                              <Image
                                 src={user.image}
                                 alt={user.name || "User"}
+                                width={32}
+                                height={32}
                                 className="h-8 w-8 rounded-full"
                               />
                             )}

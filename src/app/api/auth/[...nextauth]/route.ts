@@ -35,6 +35,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 60 * 60 * 24, // 24 hours
   },
   callbacks: {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async signIn({ user, account, profile: _profile, email: _email, credentials: _credentials }) {
       // Allow sign in if:
       // 1. This is a first time sign in
@@ -92,8 +93,9 @@ export const authOptions: NextAuthOptions = {
       }
       
       // Add user role to token if available
-      if (user) {
-        token.role = (user as any).role;
+      if (user && typeof user === "object" && "role" in user) {
+        // @ts-expect-error: user may not have role property in type
+        token.role = user.role;
       }
       
       return token;
@@ -101,9 +103,9 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       // Send access_token and other GitHub-specific data to the client
       if (token && session.user) {
-        (session as any).accessToken = token.accessToken;
-        (session as any).user.githubId = token.sub;
-        (session as any).user.role = token.role;
+        session.accessToken = token.accessToken;
+        session.user.githubId = token.sub;
+        session.user.role = token.role;
       }
       return session;
     }  },
