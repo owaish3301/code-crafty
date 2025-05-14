@@ -27,9 +27,9 @@ type CheckAdminData = {
 type AppDataContextType = {
   user: UserApiData | undefined;
   isAdmin: boolean;
-  session: any;
+  session: unknown;
   loading: boolean;
-  error: any;
+  error: Error | null;
   mutateUser: () => void;
   mutateAdmin: () => void;
 };

@@ -1,8 +1,8 @@
 // Simple in-memory cache
-const cache: Record<string, { data: any; timestamp: number }> = {};
+const cache: Record<string, { data: unknown; timestamp: number }> = {};
 const CACHE_TTL = 300000; // 5 minutes in milliseconds
 
-export async function fetcher<T = any>(input: RequestInfo, init?: RequestInit): Promise<T> {
+export async function fetcher<T = unknown>(input: RequestInfo, init?: RequestInit): Promise<T> {
   try {
     const url = typeof input === 'string' ? input : input.url;
     
