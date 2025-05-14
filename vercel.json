@@ -1,0 +1,5 @@
+{
+  "buildCommand": "chmod +x scripts/prisma-generate.sh && scripts/prisma-generate.sh && npm run build",
+  "installCommand": "npm install",
+  "framework": "nextjs"
+}

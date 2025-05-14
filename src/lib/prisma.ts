@@ -7,7 +7,20 @@ import { PrismaClient } from '@prisma/client';
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
-export const prisma = globalForPrisma.prisma || new PrismaClient();
+// Function to initialize Prisma with retries
+function initPrisma() {
+  try {
+    const client = new PrismaClient();
+    // Test the connection
+    client.$connect();
+    return client;
+  } catch (error) {
+    console.error('Failed to initialize Prisma client:', error);
+    throw error;
+  }
+}
+
+export const prisma = globalForPrisma.prisma || initPrisma();
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
