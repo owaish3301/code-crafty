@@ -482,13 +482,25 @@ export default function RoadmapEditor({ roadmapId }: RoadmapEditorProps) {
         return
       }
       // Restore all nodes and edges from flat arrays
-      const newNodes: Node<Record<string, unknown>>[] = (data.nodes || []).map((node: any) => ({
+      const newNodes: Node<Record<string, unknown>>[] = (data.nodes || []).map((node: {
+        id: string;
+        type: string;
+        data: Record<string, unknown>;
+        position: { x: number; y: number };
+      }) => ({
         id: node.id,
         type: node.type,
         data: node.data,
         position: node.position,
       }))
-      const newEdges: Edge<Record<string, unknown>>[] = (data.connections || []).map((conn: any) => ({
+      const newEdges: Edge<Record<string, unknown>>[] = (data.connections || []).map((conn: {
+        id: string;
+        source: string;
+        target: string;
+        type?: string;
+        sourceHandle?: string;
+        targetHandle?: string;
+      }) => ({
         id: conn.id,
         source: conn.source,
         target: conn.target,
@@ -499,8 +511,8 @@ export default function RoadmapEditor({ roadmapId }: RoadmapEditorProps) {
       setNodes(newNodes)
       setEdges(newEdges)
       setJsonError("")
-    } catch (e: any) {
-      setJsonError("Invalid JSON: " + e.message)
+    } catch (e: unknown) {
+      setJsonError("Invalid JSON: " + (e instanceof Error ? e.message : String(e)))
     }
   }
 
@@ -692,9 +704,8 @@ export default function RoadmapEditor({ roadmapId }: RoadmapEditorProps) {
           className="w-full min-h-[150px] md:min-h-[220px] font-mono text-xs rounded-md border border-input bg-background px-3 py-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 resize-vertical"
           spellCheck={false}
         />
-        {jsonError && <div className="text-red-500 text-xs mt-1">{jsonError}</div>}
-        <div className="text-xs text-muted-foreground mt-1">
-          Paste or edit the roadmap JSON above and click "Load from JSON" to update the visual editor.
+        {jsonError && <div className="text-red-500 text-xs mt-1">{jsonError}</div>}      <div className="text-xs text-muted-foreground mt-1">
+          Paste or edit the roadmap JSON above and click &quot;Load from JSON&quot; to update the visual editor.
         </div>
       </div>
 
