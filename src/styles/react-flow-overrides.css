@@ -1,0 +1,22 @@
+/**
+ * Custom overrides for React Flow controls in dark mode
+ */
+
+.dark .react-flow__controls {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+.dark .react-flow__controls-button {
+  background-color: #353946;
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+}
+
+.dark .react-flow__controls-button:hover {
+  background-color: hsl(var(--accent));
+}
+
+.dark .react-flow__controls-button svg {
+  fill: hsl(var(--foreground));
+}
